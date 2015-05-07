@@ -1,20 +1,22 @@
 {
-  "name": "ng-token-auth",
-  "version": "0.0.25-beta1",
+  "name": "ng-token-auth-localOAuth",
+  "version": "0.0.25-beta1-OAuth",
   "authors": [
-    "Lynn Dylan Hurley <lynn.dylan.hurley@gmail.com>"
+    "Lynn Dylan Hurley <lynn.dylan.hurley@gmail.com>",
+    "Nick McIntosh <nick@nickmcintosh.net>"
   ],
-  "description": "Token based authentication system for angular js. Includes support for oauth2 authentication using Facebook, Github, and Google.",
+  "description": "A very minor fork adding support for OAuth tokens obtained client side of the token based authentication system for angular js. Includes support for oauth2 authentication using Facebook, Github, and Google. Hopefully, these changes are useful to everyone and they can be merged into the main project.",
   "main": "dist/ng-token-auth.js",
   "keywords": [
     "authentication",
     "oauth2",
     "angular",
     "token",
-    "secure"
+    "secure",
+    "cordova"
   ],
   "license": "MIT",
-  "homepage": "http://github.com/lynndylanhurley/ng-token-auth",
+  "homepage": "http://github.com/heysailor/ng-token-auth-localOAuth",
   "ignore": [
     "**/.*",
     "node_modules",

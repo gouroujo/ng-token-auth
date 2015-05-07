@@ -35,12 +35,15 @@ angular.module('ng-token-auth', ['ipCookie'])
 
         handleLoginResponse:           (resp) -> resp.data
         handleAccountUpdateResponse:   (resp) -> resp.data
-        handleTokenValidationResponse: (resp) -> resp.data
+        handleTokenValidationResponse: (resp) -> resp.data 
 
         authProviderPaths:
           github:    '/auth/github'
           facebook:  '/auth/facebook'
           google:    '/auth/google_oauth2'
+
+        # heysailor/ng-token-auth-localOAuth
+        submitOAuthTokenPath:    '/auth/OAuthToken'
 
 
     defaultConfigName = "default"
@@ -164,7 +167,9 @@ angular.module('ng-token-auth', ['ipCookie'])
             $rootScope.requestPasswordReset = angular.bind(@, @requestPasswordReset)
             $rootScope.updatePassword       = angular.bind(@, @updatePassword)
             $rootScope.updateAccount        = angular.bind(@, @updateAccount)
-
+            # heysailor/ng-token-auth-localOAuth
+            $rootScope.submitOAuthToken     = angular.bind(@, @submitOAuthToken)
+            
             # check to see if user is returning user
             if @getConfig().validateOnPageLoad
               @validateUser({config: @getSavedConfig()})
@@ -192,6 +197,26 @@ angular.module('ng-token-auth', ['ipCookie'])
           submitLogin: (params, opts={}) ->
             @initDfd()
             $http.post(@apiUrl(opts.config) + @getConfig(opts.config).emailSignInPath, params)
+              .success((resp) =>
+                @setConfigName(opts.config)
+                authData = @getConfig(opts.config).handleLoginResponse(resp, @)
+                @handleValidAuth(authData)
+                $rootScope.$broadcast('auth:login-success', @user)
+              )
+              .error((resp) =>
+                @rejectDfd({
+                  reason: 'unauthorized'
+                  errors: ['Invalid credentials']
+                })
+                $rootScope.$broadcast('auth:login-error', resp)
+              )
+            @dfd.promise
+
+          # heysailor/ng-token-auth-localOAuth
+          # pass OAuth token obtained client side to authenticate serverside
+          submitOAuthToken: (params, opts={}) ->
+            @initDfd()
+            $http.post(@apiUrl(opts.config) + @getConfig(opts.config).submitOAuthTokenPath, params)
               .success((resp) =>
                 @setConfigName(opts.config)
                 authData = @getConfig(opts.config).handleLoginResponse(resp, @)
