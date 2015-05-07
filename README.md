@@ -35,6 +35,7 @@ This project comes bundled with a test app. You can run the demo locally by foll
   * [`$auth.validateUser`](#authvalidateuser)
   * [`$auth.submitRegistration`](#authsubmitregistration)
   * [`$auth.submitLogin`](#authsubmitlogin)
+  * [`$auth.submitOAuthToken`](#authsubmitOAuthtoken)
   * [`$auth.signOut`](#authsignout)
   * [`$auth.requestPasswordReset`](#authrequestpasswordreset)
   * [`$auth.updatePassword`](#authupdatepassword)
@@ -442,32 +443,15 @@ angular.module('ngTokenAuthTestApp')
 
       })
       .then(function (success) {
-        $scope.handleFbSuccess(success);
+        // handle success
       })
       .catch(function (error) {
-        $scope.handleFbError(error);
+        // handle error
       });
 
 
     };
   });
-~~~
-
-##### Example use in a template:
-~~~html
-<form ng-submit="submitLogin(loginForm)" role="form" ng-init="loginForm = {}">
-  <div class="form-group">
-    <label>email</label>
-    <input type="email" name="email" ng-model="loginForm.email" required="required" class="form-control"/>
-  </div>
-
-  <div class="form-group">
-    <label>password</label>
-    <input type="password" name="password" ng-model="loginForm.password" required="required" class="form-control"/>
-  </div>
-
-  <button type="submit" class="btn btn-primary btn-lg">Sign in</button>
-</form>
 ~~~
 
 ###$auth.signOut
