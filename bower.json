@@ -1,6 +1,6 @@
 {
   "name": "ng-token-auth-localoauth",
-  "version": "0.0.25-beta1-oauth",
+  "version": "0.0.1-oauth",
   "authors": [
     "Lynn Dylan Hurley <lynn.dylan.hurley@gmail.com>",
     "Nick McIntosh <nick@nickmcintosh.net>"
