@@ -148,6 +148,7 @@ angular.module('myApp', ['ng-token-auth'])
       apiUrl:                  '/api',
       tokenValidationPath:     '/auth/validate_token',
       signOutUrl:              '/auth/sign_out',
+      submitOAuthTokenPath:    '/auth/validate_OAuth_token',
       emailRegistrationPath:   '/auth',
       accountUpdatePath:       '/auth',
       accountDeletePath:       '/auth',
