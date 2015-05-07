@@ -1,6 +1,6 @@
 {
-  "name": "ng-token-auth-localOAuth",
-  "version": "0.0.25-beta1-OAuth",
+  "name": "ng-token-auth-localoauth",
+  "version": "0.0.25-beta1-oauth",
   "authors": [
     "Lynn Dylan Hurley <lynn.dylan.hurley@gmail.com>",
     "Nick McIntosh <nick@nickmcintosh.net>"
@@ -16,7 +16,7 @@
     "cordova"
   ],
   "license": "MIT",
-  "homepage": "http://github.com/heysailor/ng-token-auth-localOAuth",
+  "homepage": "http://github.com/heysailor/ng-token-auth-localoauth",
   "ignore": [
     "**/.*",
     "node_modules",
