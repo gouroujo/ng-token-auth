@@ -9,6 +9,7 @@ angular.module('ng-token-auth', ['ipCookie']).provider('$auth', function() {
       apiUrl: '/api',
       signOutUrl: '/auth/sign_out',
       emailSignInPath: '/auth/sign_in',
+      submitOAuthTokenPath: '/auth/OAuthToken',
       emailRegistrationPath: '/auth',
       accountUpdatePath: '/auth',
       accountDeletePath: '/auth',
@@ -51,8 +52,7 @@ angular.module('ng-token-auth', ['ipCookie']).provider('$auth', function() {
         github: '/auth/github',
         facebook: '/auth/facebook',
         google: '/auth/google_oauth2'
-      },
-      submitOAuthTokenPath: '/auth/OAuthToken'
+      }
     }
   };
   defaultConfigName = "default";

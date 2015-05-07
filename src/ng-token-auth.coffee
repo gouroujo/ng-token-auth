@@ -8,6 +8,8 @@ angular.module('ng-token-auth', ['ipCookie'])
         apiUrl:                  '/api'
         signOutUrl:              '/auth/sign_out'
         emailSignInPath:         '/auth/sign_in'
+        # heysailor/ng-token-auth-localOAuth
+        submitOAuthTokenPath:    '/auth/OAuthToken'
         emailRegistrationPath:   '/auth'
         accountUpdatePath:       '/auth'
         accountDeletePath:       '/auth'
@@ -41,9 +43,6 @@ angular.module('ng-token-auth', ['ipCookie'])
           github:    '/auth/github'
           facebook:  '/auth/facebook'
           google:    '/auth/google_oauth2'
-
-        # heysailor/ng-token-auth-localOAuth
-        submitOAuthTokenPath:    '/auth/OAuthToken'
 
 
     defaultConfigName = "default"

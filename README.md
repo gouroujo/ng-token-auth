@@ -402,6 +402,57 @@ angular.module('ngTokenAuthTestApp')
   });
 ~~~
 
+###$auth.submitOAuthToken
+Authenticate a user with a OAuth token obtained locally (eg on a mobile app using ngCordova's $facebookConnect).
+Note that this does NOT work with the [devise token auth](https://github.com/lynndylanhurley/devise_token_auth#usage) gem for Rails - 
+it requires server side code to take the provided OAuth token and validate it with the originating provider, returning a app-specific
+access_token if validation passes.
+
+Accepts an object with the following params:
+
+* **OAuthType**
+* **OAuthData**
+
+This method broadcasts the following events:
+
+* [`auth:login-success`](#authlogin-success)
+* [`auth:login-error`](#authlogin-error)
+
+##### Example use in a controller, using ngCordova's $facebookConnect:
+~~~javascript
+angular.module('ngTokenAuthTestApp')
+  .controller('IndexCtrl', function($scope, $auth, $cordovaFacebook) {
+    $scope.handleLoginBtnClick = function() {
+
+
+      $cordovaFacebook.login(fbPermissions)
+      .then(function(success) {
+
+        var OAuth = {
+          OAuthType: 'facebook',
+          OAuthData: success
+        };
+
+        return OAuth;
+
+      })
+      .then(function(OAuth){
+
+        return $auth.submitOAuthToken(OAuth);
+
+      })
+      .then(function (success) {
+        $scope.handleFbSuccess(success);
+      })
+      .catch(function (error) {
+        $scope.handleFbError(error);
+      });
+
+
+    };
+  });
+~~~
+
 ##### Example use in a template:
 ~~~html
 <form ng-submit="submitLogin(loginForm)" role="form" ng-init="loginForm = {}">
