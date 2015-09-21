@@ -9,6 +9,7 @@ angular.module('ng-token-auth', ['ipCookie']).provider('$auth', function() {
       apiUrl: '/api',
       signOutUrl: '/auth/sign_out',
       emailSignInPath: '/auth/sign_in',
+      submitOAuthTokenPath: '/auth/OAuthToken',
       emailRegistrationPath: '/auth',
       accountUpdatePath: '/auth',
       accountDeletePath: '/auth',
@@ -156,6 +157,7 @@ angular.module('ng-token-auth', ['ipCookie']).provider('$auth', function() {
               $rootScope.requestPasswordReset = angular.bind(this, this.requestPasswordReset);
               $rootScope.updatePassword = angular.bind(this, this.updatePassword);
               $rootScope.updateAccount = angular.bind(this, this.updateAccount);
+              $rootScope.submitOAuthToken = angular.bind(this, this.submitOAuthToken);
               if (this.getConfig().validateOnPageLoad) {
                 return this.validateUser({
                   config: this.getSavedConfig()
@@ -184,6 +186,30 @@ angular.module('ng-token-auth', ['ipCookie']).provider('$auth', function() {
               }
               this.initDfd();
               $http.post(this.apiUrl(opts.config) + this.getConfig(opts.config).emailSignInPath, params).success((function(_this) {
+                return function(resp) {
+                  var authData;
+                  _this.setConfigName(opts.config);
+                  authData = _this.getConfig(opts.config).handleLoginResponse(resp, _this);
+                  _this.handleValidAuth(authData);
+                  return $rootScope.$broadcast('auth:login-success', _this.user);
+                };
+              })(this)).error((function(_this) {
+                return function(resp) {
+                  _this.rejectDfd({
+                    reason: 'unauthorized',
+                    errors: ['Invalid credentials']
+                  });
+                  return $rootScope.$broadcast('auth:login-error', resp);
+                };
+              })(this));
+              return this.dfd.promise;
+            },
+            submitOAuthToken: function(params, opts) {
+              if (opts == null) {
+                opts = {};
+              }
+              this.initDfd();
+              $http.post(this.apiUrl(opts.config) + this.getConfig(opts.config).submitOAuthTokenPath, params).success((function(_this) {
                 return function(resp) {
                   var authData;
                   _this.setConfigName(opts.config);
