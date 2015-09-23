@@ -1,5 +1,5 @@
 {
-  "name": "ng-token-auth",
+  "name": "ng-token-auth-localoauth",
   "version": "0.0.28",
   "authors": [
     "Lynn Dylan Hurley <lynn.dylan.hurley@gmail.com>",
@@ -16,7 +16,7 @@
     "cordova"
   ],
   "license": "MIT",
-  "homepage": "http://github.com/heysailor/ng-token-auth-localoauth",
+  "homepage": "https://github.com/gouroujo/ng-token-auth",
   "ignore": [
     "**/.*",
     "node_modules",
